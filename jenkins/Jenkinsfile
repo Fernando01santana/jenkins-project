@@ -8,20 +8,16 @@ pipeline {
 
     stages {
         stage('Build') {
-            stages {
-                stage('build'){
-                    steps{
-                        sh: 'npm install'
-                    }
-                }
+            steps {
+                sh: 'npm install'
             }
-            stages {
-                stage('execute application'){
-                    steps{
-                        sh: 'npm start'
-                    }
+    stages {
+        stage('execute application'){
+            steps{
+                sh: 'npm start'
                 }
             }
         }
     }
+}
 }
