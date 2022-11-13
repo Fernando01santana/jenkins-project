@@ -8,15 +8,24 @@ pipeline {
     stages {
         stage('Build') {
             agent {
-                docker { image 'maven' }
+                docker { 
+                    image 'node:6-alpine',
+                    args:'-p 3000:3000'
+                     }
             }
-            steps {
-                sh "mvn package -Dmaven.test.skip=true"
-                script {
-                    pom = readMavenPom file: 'pom.xml'
-                    POM_VERSION = pom.version
+            stages {
+                stage('build'){
+                    steps{
+                        sh: 'npm install'
+                    }
                 }
-                stash 'source'
+            }
+            stages {
+                stage('execute application'){
+                    steps{
+                        sh: 'npm start'
+                    }
+                }
             }
         }
     }
