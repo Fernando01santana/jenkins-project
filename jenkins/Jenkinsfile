@@ -11,11 +11,12 @@ pipeline {
             steps {
                 sh 'npm install'
             }
+        }
         stage('execute application'){
             steps{
                 sh 'npm start'
-                }
+            }
             }
         }
     }
-}
+
